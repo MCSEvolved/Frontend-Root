@@ -1,0 +1,4 @@
+pages:
+  - EmeraldExchange:
+    repo: "git@github.com:MCSEvolved/EmeraldExchange.git"
+    path: "emeraldexchange"

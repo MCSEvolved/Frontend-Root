@@ -1,0 +1,26 @@
+import {execSync} from "child_process"
+import { load } from "js-yaml";
+import { readFileSync } from "fs";
+import { copySync } from "fs-extra"
+import { join } from 'path'
+
+interface yamlConfig {
+    pages: {
+        repo: string
+        path: string
+    }[]
+}
+
+const ymlFile = readFileSync('./pages.yml', {encoding: "utf-8"})
+const {pages} = load(ymlFile) as yamlConfig
+for(const [pageName, {repo, path}] of Object.entries(pages)) {
+    execSync(`git clone ${repo}`, {stdio: 'inherit'})
+    const foldername = repo.match(/\/(.*)\.git/)?.[1]
+    if(!foldername) throw `failed to match foldername in ${pageName}`
+    console.log(join(__dirname, foldername))
+    execSync(`npm install`, {stdio: 'inherit', cwd: join(__dirname, foldername)})
+    execSync(`npm run build`, {stdio: 'inherit', cwd: join(__dirname, foldername)})
+
+    copySync(`./${foldername}/dist`, `./build/${path}`)
+
+}
