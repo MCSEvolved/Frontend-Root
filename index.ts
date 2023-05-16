@@ -1,18 +1,22 @@
-import {execSync} from "child_process"
+import { execSync } from "child_process"
 import { load } from "js-yaml";
 import { readFileSync } from "fs";
-import { copySync } from "fs-extra"
+import { copySync, writeFileSync } from "fs-extra"
 import { join } from 'path'
 
-interface yamlConfig {
+interface IyamlConfig {
     pages: {
         repo: string
         path: string
     }[]
 }
 
+interface IfirebaseConfig {
+    rewrites: {source: string, destination: string}[]
+}
+
 const ymlFile = readFileSync('./pages.yml', {encoding: "utf-8"})
-const {pages} = load(ymlFile) as yamlConfig
+const {pages} = load(ymlFile) as IyamlConfig
 for(const [pageName, {repo, path}] of Object.entries(pages)) {
     execSync(`git clone ${repo}`, {stdio: 'inherit'})
     const foldername = repo.match(/\/(.*)\.git/)?.[1]
@@ -22,5 +26,15 @@ for(const [pageName, {repo, path}] of Object.entries(pages)) {
     execSync(`npm run build`, {stdio: 'inherit', cwd: join(__dirname, foldername)})
 
     copySync(`./${foldername}/dist`, `./build/${path}`)
-
 }
+
+const firebaseConfig: IfirebaseConfig = require('./firebase.json')
+
+firebaseConfig.rewrites = []
+for(const page of Object.values(pages)){
+    firebaseConfig.rewrites.push({
+        source: `${page.path}/**`,
+        destination: `${page.path}/index.html`
+    })
+}
+writeFileSync('./firebase.json', JSON.stringify(firebaseConfig))
