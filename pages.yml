@@ -1,4 +1,4 @@
 pages:
-  - EmeraldExchange:
-    repo: "git@github.com:MCSEvolved/EmeraldExchange.git"
-    path: "emerald-exchange"
+  - Login:
+    repo: "git@github.com:MCSEvolved/Login.git"
+    path: "login"
