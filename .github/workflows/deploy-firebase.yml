@@ -3,6 +3,8 @@
 
 name: Deploy to Firebase Hosting on custom event
 on:
+  push:
+    branches: [main]
   repository_dispatch:
     types: [rootbuild]
 jobs:
