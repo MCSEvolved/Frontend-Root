@@ -2,3 +2,6 @@ pages:
   - Login:
     repo: "git@github.com:MCSEvolved/Login.git"
     path: "login"
+  - Admin-Panel:
+    repo: "git@github.com:MCSEvolved/Admin-Panel-Frontend.git"
+    path: "admin-panel"
