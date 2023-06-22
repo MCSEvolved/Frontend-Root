@@ -33,8 +33,8 @@ const firebaseConfig: IfirebaseConfig = require('./firebase.json')
 firebaseConfig.rewrites = []
 for(const page of Object.values(pages)){
     firebaseConfig.rewrites.push({
-        source: `${page.path}/**`,
-        destination: `${page.path}/index.html`
+        source: `/${page.path}/**`,
+        destination: `/${page.path}/index.html`
     })
 }
 writeFileSync('./firebase.json', JSON.stringify(firebaseConfig))
