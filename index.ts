@@ -37,4 +37,5 @@ for(const page of Object.values(pages)){
         destination: `/${page.path}/index.html`
     })
 }
+console.log(firebaseConfig)
 writeFileSync('./firebase.json', JSON.stringify(firebaseConfig))
