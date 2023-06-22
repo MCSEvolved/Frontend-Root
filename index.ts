@@ -12,7 +12,9 @@ interface IyamlConfig {
 }
 
 interface IfirebaseConfig {
-    rewrites: {source: string, destination: string}[]
+    hosting: {
+        rewrites: {source: string, destination: string}[]
+    }
 }
 
 const ymlFile = readFileSync('./pages.yml', {encoding: "utf-8"})
@@ -31,10 +33,9 @@ for(const [pageName, {repo, path}] of Object.entries(pages)) {
 const firebaseConfig: IfirebaseConfig = require('./firebase.json')
 
 for(const page of Object.values(pages)){
-    firebaseConfig.rewrites.push({
+    firebaseConfig.hosting.rewrites.push({
         source: `/${page.path}/**`,
         destination: `/${page.path}/index.html`
     })
 }
-console.log(firebaseConfig)
 writeFileSync('./firebase.json', JSON.stringify(firebaseConfig))
