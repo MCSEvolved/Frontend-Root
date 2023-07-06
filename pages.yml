@@ -5,3 +5,6 @@ pages:
   - Admin-Panel:
     repo: "git@github.com:MCSEvolved/Admin-Panel-Frontend.git"
     path: "admin-panel"
+  - Static-Pages:
+    repo: "git@github.com:MCSEvolved/Static-Pages.git"
+    path: "static-pages"
