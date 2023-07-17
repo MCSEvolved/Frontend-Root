@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site":"dev-mcsynergy",
     "public": "build",
     "ignore": [
       "firebase.json",
