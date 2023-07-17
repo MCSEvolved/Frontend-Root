@@ -25,4 +25,4 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_MCSYNERGY_55878 }}'
           channelId: live
-          projectId: mcsynergy-55878
+          projectId: dev-mcsynergy
