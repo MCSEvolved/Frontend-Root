@@ -8,3 +8,6 @@ pages:
   - Static-Pages:
     repo: "git@github.com:MCSEvolved/Static-Pages.git"
     path: "static-pages"
+  - Tracker:
+    repo: "git@github.com:MCSEvolved/Tracker-Frontend.git"
+    path: "tracker"
